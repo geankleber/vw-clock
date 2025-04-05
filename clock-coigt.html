@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relógio Eletrobras</title>
+    <style>
+        body {
+            background-color: #121212;
+            color: #ffffff;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            width: 100%;
+        }
+        
+        .logo {
+            width: 300px;
+            height: 200px;
+            background-color: transparent;
+            margin-right: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .logo img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+        
+        .clock-container {
+            width: 300px;
+        }
+        
+        .main-clock {
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        
+        .date {
+            font-size: 18px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .secondary-clocks {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+        }
+        
+        .secondary-clock {
+            text-align: center;
+            width: 48%;
+        }
+        
+        .secondary-clock-title {
+            font-size: 14px;
+            margin-bottom: 5px;
+            color: #aaaaaa;
+        }
+        
+        .secondary-clock-time {
+            font-size: 24px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                <img src="Eletrobras_marca_principal-branca.png" alt="Eletrobras Logo">
+            </div>
+            <div class="clock-container">
+                <div class="main-clock" id="main-clock">00:00:00</div>
+                <div class="date" id="date">Domingo, 1 de Janeiro de 2023</div>
+                <div class="secondary-clocks">
+                    <div class="secondary-clock">
+                        <div class="secondary-clock-title">AC</div>
+                        <div class="secondary-clock-time" id="ac-clock">00:00:00</div>
+                    </div>
+                    <div class="secondary-clock">
+                        <div class="secondary-clock-title">AM/MT/RO/RR</div>
+                        <div class="secondary-clock-time" id="am-clock">00:00:00</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function updateClock() {
+            // Pega a data e hora atual
+            const now = new Date();
+            
+            // Aplica o ajuste de -35 segundos
+            now.setSeconds(now.getSeconds() - 35);
+            
+            // Formata a hora principal (Brasília)
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            document.getElementById('main-clock').textContent = `${hours}:${minutes}:${seconds}`;
+            
+            // Formata a data
+            const days = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'];
+            const months = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+            const day = days[now.getDay()];
+            const date = now.getDate();
+            const month = months[now.getMonth()];
+            const year = now.getFullYear();
+            document.getElementById('date').textContent = `${day}, ${date} de ${month} de ${year}`;
+            
+            // Cria horários para os fusos secundários
+            
+            // AC (menos 2 horas)
+            const acTime = new Date(now.getTime());
+            acTime.setHours(acTime.getHours() - 2);
+            const acHours = String(acTime.getHours()).padStart(2, '0');
+            const acMinutes = String(acTime.getMinutes()).padStart(2, '0');
+            const acSeconds = String(acTime.getSeconds()).padStart(2, '0');
+            document.getElementById('ac-clock').textContent = `${acHours}:${acMinutes}:${acSeconds}`;
+            
+            // AM/MT/RO/RR (menos 1 hora)
+            const amTime = new Date(now.getTime());
+            amTime.setHours(amTime.getHours() - 1);
+            const amHours = String(amTime.getHours()).padStart(2, '0');
+            const amMinutes = String(amTime.getMinutes()).padStart(2, '0');
+            const amSeconds = String(amTime.getSeconds()).padStart(2, '0');
+            document.getElementById('am-clock').textContent = `${amHours}:${amMinutes}:${amSeconds}`;
+        }
+        
+        // Atualiza o relógio a cada segundo
+        setInterval(updateClock, 1000);
+        
+        // Carrega o relógio inicialmente
+        updateClock();
+    </script>
+</body>
+</html>
