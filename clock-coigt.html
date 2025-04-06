@@ -10,7 +10,7 @@
             color: #ffffff;
             font-family: 'Arial', sans-serif;
             margin: 0;
-            padding: 20px;
+            padding: 00px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -34,7 +34,7 @@
             width: 300px;
             height: 200px;
             background-color: transparent;
-            margin-right: 120px;
+            margin-right: 220px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -50,7 +50,7 @@
         }
         
         .main-clock {
-            font-size: 48px;
+            font-size: 80px;
             font-weight: bold;
             margin-bottom: 10px;
             text-align: center;
@@ -74,7 +74,7 @@
         }
         
         .secondary-clock-title {
-            font-size: 14px;
+            font-size: 16px;
             margin-bottom: 5px;
             color: #aaaaaa;
         }
@@ -89,7 +89,7 @@
     <div class="container">
         <div class="header">
             <div class="logo">
-                <img src="Eletrobras_marca_principal-branca.png" alt="Eletrobras Logo">
+                <img src="https://geankleber.github.io/vw-clock/Eletrobras_marca_principal-branca.png" alt="Eletrobras Logo">
             </div>
             <div class="clock-container">
                 <div class="main-clock" id="main-clock">00:00:00</div>
@@ -100,7 +100,7 @@
                         <div class="secondary-clock-time" id="ac-clock">00:00:00</div>
                     </div>
                     <div class="secondary-clock">
-                        <div class="secondary-clock-title">AM/MT/RO/RR</div>
+                        <div class="secondary-clock-title">AM | MT | RO | RR</div>
                         <div class="secondary-clock-time" id="am-clock">00:00:00</div>
                     </div>
                 </div>
@@ -139,7 +139,7 @@
             const acHours = String(acTime.getHours()).padStart(2, '0');
             const acMinutes = String(acTime.getMinutes()).padStart(2, '0');
             const acSeconds = String(acTime.getSeconds()).padStart(2, '0');
-            document.getElementById('ac-clock').textContent = `${acHours}:${acMinutes}:${acSeconds}`;
+            document.getElementById('ac-clock').textContent = `${acHours}:${acMinutes}`;
             
             // AM/MT/RO/RR (menos 1 hora)
             const amTime = new Date(now.getTime());
@@ -147,7 +147,7 @@
             const amHours = String(amTime.getHours()).padStart(2, '0');
             const amMinutes = String(amTime.getMinutes()).padStart(2, '0');
             const amSeconds = String(amTime.getSeconds()).padStart(2, '0');
-            document.getElementById('am-clock').textContent = `${amHours}:${amMinutes}:${amSeconds}`;
+            document.getElementById('am-clock').textContent = `${amHours}:${amMinutes}`;
         }
         
         // Atualiza o relógio a cada segundo
